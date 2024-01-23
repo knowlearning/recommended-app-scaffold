@@ -1,0 +1,19 @@
+{
+  "name": "recommended-app-scaffold",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@knowlearning/agents": "^0.9.61",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "vite": "^5.0.8"
+  }
+}
