@@ -1,9 +1,9 @@
 import Agent from '@knowlearning/agents/browser.js'
 import { v4 as uuid, validate as isUUID } from 'uuid'
 
-import renderLoginPage from './render-login-page.js'
-import renderContentPlayer from './render-content-player.js'
-import renderContentManager from './render-content-manager.js'
+import renderLoginPage from './renderers/login-page.js'
+import renderContentPlayer from './renderers/content-player.js'
+import renderContentManager from './renderers/content-manager.js'
 
 import './style.css'
 
