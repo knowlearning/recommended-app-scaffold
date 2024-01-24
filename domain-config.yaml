@@ -1,0 +1,7 @@
+postgres:
+  tables: {}
+  scopes:
+    nameQuery: |
+     SELECT id, owner as user
+     FROM metadata
+     WHERE name LIKE $1

@@ -6,7 +6,11 @@ export default async function (id) {
   ])
 
   if (metadata.active_type === 'application/json;type=drawing-prompt') {
-
+    if (state.plays === undefined) state.plays = 0
+    state.plays += 1
+    document.body.appendChild(
+      document.createTextNode(`${content.prompt}. You've loaded this ${state.plays} times.`)
+    )
   }
   else if(metadata.active_type === 'application/json;type=dashboard-config') {
     document.body.appendChild(
