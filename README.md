@@ -5,5 +5,6 @@ You can explore a running version of this application scaffold [here](https://re
 Start in ```./main.js``` to see how we recommend an application to orchestrate:
 
 - Creation of content
+- Management of content
 - Playing of content
 - Rendering of live dashboard data
