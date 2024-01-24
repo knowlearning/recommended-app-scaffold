@@ -19,9 +19,10 @@ export default async function renderContentManager() {
   const contentCreator = document.createElement('div')
 
   contentCreator.innerHTML = `
-    <textarea id="drawing-prompt" placeholder="Enter your drawing prompt"></textarea>
+    <h1>Content Customiser</h1>
+    <textarea id="writing-prompt" placeholder="Enter your writing prompt"></textarea>
     <br>
-    <button onclick="createDrawingPrompt()">Create new drawing content</button>
+    <button onclick="createDrawingPrompt()">Create new writing prompt content</button>
   `
   document.body.appendChild(contentEntries)
   document.body.appendChild(contentCreator)
@@ -29,9 +30,17 @@ export default async function renderContentManager() {
 
 function createContentEntry(id) {
   const contentEntry = document.createElement('div')
+  contentEntry.className = 'prompt-list-entry'
+
+  contentEntry.draggable = true
+  contentEntry.addEventListener('dragstart', event => {
+    event.dataTransfer.setData('text/plain', id)
+    event.dataTransfer.setData('text/uri-list', id)
+  })
 
   const removeButton = document.createElement('button')
-  const prompt = document.createElement('span')
+  const prompt = document.createElement('div')
+  prompt.className = 'prompt-display'
   const dashboardButton = document.createElement('button')
   const playButton = document.createElement('button')
 
@@ -43,7 +52,7 @@ function createContentEntry(id) {
 
   dashboardButton.innerHTML = 'Launch Dashboard'
   dashboardButton.addEventListener('click', async () => {
-    const stateInfoForContent = await Agent.query('nameQuery', [`${id}/draw-state`])
+    const stateInfoForContent = await Agent.query('nameQuery', [`${id}/written-response`])
 
     const userDrawStates = {}
     stateInfoForContent.forEach(({ id, user }) => {
@@ -81,16 +90,17 @@ function createContentEntry(id) {
 }
 
 window.createDrawingPrompt = async function () {
-  const el = document.getElementById('drawing-prompt')
+  const el = document.getElementById('writing-prompt')
   const prompt = el.value.trim()
 
   if (prompt.length) {
     const content = await Agent.state('content')
     const id = await Agent.create({
-      active_type: 'application/json;type=drawing-prompt',
+      active_type: 'application/json;type=writing-prompt',
       active: { prompt }
     })
     content[id] = { added: Date.now() }
+    el.value = ''
   }
-  else alert('Please enter a drawing prompt!')
+  else alert('Please enter a writing prompt!')
 }
